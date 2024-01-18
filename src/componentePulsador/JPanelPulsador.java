@@ -15,4 +15,25 @@ import javax.swing.JPanel;
 public class JPanelPulsador extends JPanel implements Serializable{
     private File rutaImagen;
     private static PulsadorListener pulsadorListener;
+
+    public JPanelPulsador() {
+    }
+
+    public File getRutaImagen() {
+        return rutaImagen;
+    }
+
+    public void setRutaImagen(File rutaImagen) {
+        this.rutaImagen = rutaImagen;
+    }
+
+    public static PulsadorListener getPulsadorListener() {
+        return pulsadorListener;
+    }
+
+    public static void setPulsadorListener(PulsadorListener pulsadorListener) {
+        JPanelPulsador.pulsadorListener = pulsadorListener;
+    }
+    
+    
 }
