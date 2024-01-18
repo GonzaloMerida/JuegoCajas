@@ -2,10 +2,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package componenteCaja;
+package componenteCajonera;
 
 import java.awt.Graphics;
-import java.awt.Image;
 import java.io.File;
 import java.io.Serializable;
 import javax.swing.ImageIcon;
@@ -15,12 +14,12 @@ import javax.swing.JPanel;
  *
  * @author Gonzalo
  */
-public class JPanelCaja extends JPanel implements Serializable {
+public class JPanelCajonera extends JPanel implements Serializable {
 
     private File rutaImagen;
-    private static ArrastreListenerVertical arrastreListener;
+    private static ArrastreListenerHorizontal arrastreListener;
 
-    public JPanelCaja() {
+    public JPanelCajonera() {
     }
 
     public File getRutaImagen() {
@@ -41,12 +40,12 @@ public class JPanelCaja extends JPanel implements Serializable {
         }
     }
 
-    public static void addArrastreListenerVertical(ArrastreListenerVertical arrastreListenerVertical) {
-        JPanelCaja.arrastreListener = arrastreListenerVertical;
+    public static void addArrastreListenerVertical(ArrastreListenerHorizontal arrastreListenerVertical) {
+        JPanelCajonera.arrastreListener = arrastreListenerVertical;
     }
 
-    public static void removeArrastreListener(ArrastreListenerVertical arrastreListenerVertical) {
-        JPanelCaja.arrastreListener = null;
+    public static void removeArrastreListener(ArrastreListenerHorizontal arrastreListenerVertical) {
+        JPanelCajonera.arrastreListener = null;
     }
 
 }
