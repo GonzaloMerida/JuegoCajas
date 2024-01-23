@@ -23,7 +23,7 @@ public class JPanelCaja extends JPanel implements Serializable {
     private File rutaImagen;
     private boolean ratonPresionado = false;
     private Point puntoPresion;
-    private static ArrastreListenerVertical arrastreListener;
+    private static ArrastreListenerVertical arrastreListenerVertical;
 
 
     public JPanelCaja() {
@@ -38,8 +38,8 @@ public class JPanelCaja extends JPanel implements Serializable {
             public void mouseReleased(MouseEvent e) {
                 Point posicionActual = e.getPoint();
                 if (Math.abs(puntoPresion.y - posicionActual.y) > 50) {
-                    if (arrastreListener != null) {
-                        arrastreListener.arrastre();
+                    if (arrastreListenerVertical != null) {
+                        arrastreListenerVertical.arrastre();
                     }
                 }
                 ratonPresionado = false;
@@ -66,11 +66,11 @@ public class JPanelCaja extends JPanel implements Serializable {
     }
 
     public static void addArrastreListenerVertical(ArrastreListenerVertical arrastreListenerVertical) {
-        JPanelCaja.arrastreListener = arrastreListenerVertical;
+        JPanelCaja.arrastreListenerVertical = arrastreListenerVertical;
     }
 
     public static void removeArrastreListener(ArrastreListenerVertical arrastreListenerVertical) {
-        JPanelCaja.arrastreListener = null;
+        JPanelCaja.arrastreListenerVertical = null;
     }
 
 }
