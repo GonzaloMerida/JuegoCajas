@@ -53,6 +53,7 @@ public class JPanelCaja extends JPanel implements Serializable {
 
     public void setRutaImagen(File rutaImagen) {
         this.rutaImagen = rutaImagen;
+        repaint();
     }
 
     @Override
