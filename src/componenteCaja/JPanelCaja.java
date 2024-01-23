@@ -6,6 +6,9 @@ package componenteCaja;
 
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.Point;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.Serializable;
 import javax.swing.ImageIcon;
@@ -18,9 +21,30 @@ import javax.swing.JPanel;
 public class JPanelCaja extends JPanel implements Serializable {
 
     private File rutaImagen;
+    private boolean ratonPresionado = false;
+    private Point puntoPresion;
     private static ArrastreListenerVertical arrastreListener;
 
+
     public JPanelCaja() {
+        this.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                ratonPresionado = true;
+                puntoPresion = e.getPoint();
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                Point posicionActual = e.getPoint();
+                if (Math.abs(puntoPresion.y - posicionActual.y) > 50) {
+                    if (arrastreListener != null) {
+                        arrastreListener.arrastre();
+                    }
+                }
+                ratonPresionado = false;
+            }
+        });
     }
 
     public File getRutaImagen() {

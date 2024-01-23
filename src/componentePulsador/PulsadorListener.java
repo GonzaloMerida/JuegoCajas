@@ -9,5 +9,5 @@ package componentePulsador;
  * @author Gonzalo
  */
 public interface PulsadorListener {
-    public void pulsador();
+    public void onTeclaPulsada();
 }
