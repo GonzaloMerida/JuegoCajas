@@ -4,6 +4,8 @@
  */
 package componentePulsador;
 
+import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.Point;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -12,6 +14,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.Serializable;
+import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
 /**
@@ -25,9 +28,25 @@ public class JPanelPulsador extends JPanel implements Serializable {
     private static PulsadorListener pulsadorListener;
 
     public JPanelPulsador() {
-        this.addKeyListener(new KeyAdapter());
-        // Asegura que el panel puede recibir eventos de teclado
+
         this.setFocusable(true);
+        this.addKeyListener(new KeyListener() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if (e.getKeyChar() == 'a' || e.getKeyChar() == 'A') {
+                    if (pulsadorListener != null) {
+                        pulsadorListener.onTeclaPulsada();
+                    }
+                }
+            }
+            @Override
+            public void keyTyped(KeyEvent e) {
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+            }
+        });
     }
 
     public File getRutaImagen() {
@@ -36,6 +55,7 @@ public class JPanelPulsador extends JPanel implements Serializable {
 
     public void setRutaImagen(File rutaImagen) {
         this.rutaImagen = rutaImagen;
+        repaint();
     }
 
     public static PulsadorListener getPulsadorListener() {
@@ -46,31 +66,14 @@ public class JPanelPulsador extends JPanel implements Serializable {
         JPanelPulsador.pulsadorListener = pulsadorListener;
     }
 
-    private void Listener(MouseAdapter mouseAdapter) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    private class KeyAdapter implements KeyListener {
-
-        @Override
-        public void keyTyped(KeyEvent e) {
-            
-        }
-
-        @Override
-        public void keyPressed(KeyEvent e) {
-            if (e.getKeyChar() == 'p') {
-                teclaPulsada = true;
-                if (pulsadorListener != null) {
-                    pulsadorListener.onTeclaPulsada();
-                }
-            }
-        }
-
-        @Override
-        public void keyReleased(KeyEvent e) {
-            teclaPulsada = false;
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        if (rutaImagen != null && rutaImagen.exists()) {
+            //Creamos un objeto imagen a partir de la ruta que nos llega
+            ImageIcon imageIcon = new ImageIcon(rutaImagen.getAbsolutePath());
+            //Image imagenEscalada = imageIcon.getImage().getScaledInstance(getWidth(), getHeight(), Image.SCALE_DEFAULT);
+            g.drawImage(imageIcon.getImage(), 0, 0, null);
         }
     }
-
 }

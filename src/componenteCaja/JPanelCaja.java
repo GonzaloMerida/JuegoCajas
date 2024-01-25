@@ -37,7 +37,7 @@ public class JPanelCaja extends JPanel implements Serializable {
             @Override
             public void mouseReleased(MouseEvent e) {
                 Point posicionActual = e.getPoint();
-                if (Math.abs(puntoPresion.y - posicionActual.y) > 50) {
+                if (puntoPresion.y - posicionActual.y > 50) {
                     if (arrastreListenerVertical != null) {
                         arrastreListenerVertical.arrastre();
                     }
@@ -62,6 +62,7 @@ public class JPanelCaja extends JPanel implements Serializable {
         if (rutaImagen != null && rutaImagen.exists()) {
             //Creamos un objeto imagen a partir de la ruta que nos llega
             ImageIcon imageIcon = new ImageIcon(rutaImagen.getAbsolutePath());
+            //Image imagenEscalada = imageIcon.getImage().getScaledInstance(getWidth(), getHeight(), Image.SCALE_DEFAULT);
             g.drawImage(imageIcon.getImage(), 0, 0, null);
         }
     }

@@ -5,6 +5,7 @@
 package componenteCajonera;
 
 import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.Point;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -35,7 +36,7 @@ public class JPanelCajonera extends JPanel implements Serializable {
             @Override
             public void mouseReleased(MouseEvent e) {
                 Point posicionActual = e.getPoint();
-                if (Math.abs(puntoPresion.x - posicionActual.x) > 50) {
+                if (puntoPresion.x - posicionActual.x < 50) {
                     if (arrastreListener != null) {
                         arrastreListener.arrastre();
                     }
@@ -51,6 +52,7 @@ public class JPanelCajonera extends JPanel implements Serializable {
 
     public void setRutaImagen(File rutaImagen) {
         this.rutaImagen = rutaImagen;
+        repaint();
     }
 
     @Override
@@ -59,15 +61,16 @@ public class JPanelCajonera extends JPanel implements Serializable {
         if (rutaImagen != null && rutaImagen.exists()) {
             //Creamos un objeto imagen a partir de la ruta que nos llega
             ImageIcon imageIcon = new ImageIcon(rutaImagen.getAbsolutePath());
+            //Image imagenEscalada = imageIcon.getImage().getScaledInstance(getWidth(), getHeight(), Image.SCALE_DEFAULT);
             g.drawImage(imageIcon.getImage(), 0, 0, null);
         }
     }
 
-    public static void addArrastreListenerVertical(ArrastreListenerHorizontal arrastreListenerVertical) {
-        JPanelCajonera.arrastreListener = arrastreListenerVertical;
+    public static void addArrastreListenerHorizontal(ArrastreListenerHorizontal arrastreListenerHorizontal) {
+        JPanelCajonera.arrastreListener = arrastreListenerHorizontal;
     }
 
-    public static void removeArrastreListener(ArrastreListenerHorizontal arrastreListenerVertical) {
+    public static void removeArrastreListener(ArrastreListenerHorizontal arrastreListenerHorizontal) {
         JPanelCajonera.arrastreListener = null;
     }
 
