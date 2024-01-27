@@ -21,26 +21,26 @@ import javax.swing.JPanel;
  *
  * @author Gonzalo
  */
-public class JPanelPulsador extends JPanel implements Serializable {
+public class JPanelPulsador extends javax.swing.JPanel implements Serializable {
 
     private File rutaImagen;
     private boolean teclaPulsada = false;
     private static PulsadorListener pulsadorListener;
 
     public JPanelPulsador() {
-
+        initComponents();
         this.setFocusable(true);
-        this.addKeyListener(new KeyListener() {
-            @Override
-            public void keyPressed(KeyEvent e) {
-                if (e.getKeyChar() == 'a' || e.getKeyChar() == 'A') {
-                    if (pulsadorListener != null) {
-                        pulsadorListener.onTeclaPulsada();
-                    }
-                }
-            }
+        this.addKeyListener(new KeyAdapter() {
             @Override
             public void keyTyped(KeyEvent e) {
+                char tecla = e.getKeyChar();
+                if (Character.toLowerCase(tecla) == 'a') {
+                    pulsadorListener.onTeclaPulsada();
+                }
+            }
+
+            @Override
+            public void keyPressed(KeyEvent e) {
             }
 
             @Override
@@ -66,6 +66,14 @@ public class JPanelPulsador extends JPanel implements Serializable {
         JPanelPulsador.pulsadorListener = pulsadorListener;
     }
 
+    public void addPulsacionListener(PulsadorListener pulsadorListener) {
+        this.pulsadorListener = pulsadorListener;
+    }
+
+    public void removePulsacionListener(PulsadorListener pulsadorListener) {
+        this.pulsadorListener = null;
+    }
+
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -75,5 +83,19 @@ public class JPanelPulsador extends JPanel implements Serializable {
             //Image imagenEscalada = imageIcon.getImage().getScaledInstance(getWidth(), getHeight(), Image.SCALE_DEFAULT);
             g.drawImage(imageIcon.getImage(), 0, 0, null);
         }
+    }
+
+    private void initComponents() {
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
+        layout.setHorizontalGroup(
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(0, 651, Short.MAX_VALUE)
+        );
+        layout.setVerticalGroup(
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(0, 462, Short.MAX_VALUE)
+        );
     }
 }

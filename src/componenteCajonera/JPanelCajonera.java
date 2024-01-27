@@ -36,7 +36,7 @@ public class JPanelCajonera extends JPanel implements Serializable {
             @Override
             public void mouseReleased(MouseEvent e) {
                 Point posicionActual = e.getPoint();
-                if (puntoPresion.x - posicionActual.x < 50) {
+                if (posicionActual.x - puntoPresion.x  > 0) {
                     if (arrastreListener != null) {
                         arrastreListener.arrastre();
                     }
